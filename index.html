@@ -994,6 +994,21 @@
                     <input class="form-input" type="password" placeholder="Min 8 characters">
                 </div>
                 <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input class="form-input" type="password" placeholder="Re-enter password">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div style="display:flex; gap:16px; padding:8px 0;">
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; cursor:pointer;">
+                            <input type="radio" name="gender" checked style="accent-color:var(--primary); width:18px; height:18px;"> Male
+                        </label>
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; cursor:pointer;">
+                            <input type="radio" name="gender" style="accent-color:var(--primary); width:18px; height:18px;"> Female
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label>Home Town</label>
                     <input class="form-input" placeholder="Select your town">
                 </div>
@@ -1002,8 +1017,20 @@
                     <div class="upload-area">
                         <div class="upload-icon">&#128196;</div>
                         <p>Tap to upload your CV</p>
-                        <span class="format">PDF, DOC, DOCX (Max 5MB)</span>
+                        <span class="format">PDF, DOC, DOCX (Max 2MB)</span>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400; line-height:1.4;">
+                        <input type="checkbox" checked style="accent-color:var(--primary); width:18px; height:18px; margin-top:2px; flex-shrink:0;">
+                        I agree to the <a href="#" style="color:var(--primary); text-decoration:none;">Privacy Policy</a> &amp; <a href="#" style="color:var(--primary); text-decoration:none;">Terms</a>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label style="display:flex; align-items:center; gap:8px; font-weight:400;">
+                        <input type="checkbox" checked style="accent-color:var(--primary); width:18px; height:18px;">
+                        Receive jobs by email
+                    </label>
                 </div>
                 <button class="btn btn-primary" onclick="showScreen('screen-home')">Create Account</button>
                 <br><br>
@@ -1042,6 +1069,17 @@
             <button class="header-btn">&#128276;</button>
         </div>
         <div class="content">
+            <!-- Email Verification Banner -->
+            <div id="email-verify-banner" style="margin:12px 16px; background:var(--warning-light); border:1px solid var(--warning); border-radius:10px; padding:14px 16px; display:flex; align-items:flex-start; gap:10px;">
+                <span style="font-size:18px;">&#9888;</span>
+                <div style="flex:1;">
+                    <div style="font-size:13px; font-weight:600; color:var(--warning);">Verify your email</div>
+                    <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Please check your inbox and verify your email to access all features.</div>
+                    <button style="margin-top:8px; background:var(--warning); color:white; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;">Resend Email</button>
+                </div>
+                <span onclick="document.getElementById('email-verify-banner').style.display='none'" style="cursor:pointer; font-size:16px; color:var(--text-muted);">&#10005;</span>
+            </div>
+
             <div class="welcome-banner">
                 <h2>Hi, Kamal &#128075;</h2>
                 <p>Ready to find your next opportunity?</p>
@@ -1075,9 +1113,56 @@
                     <div class="icon">&#128196;</div>
                     <div class="label">My CV</div>
                 </div>
-                <div class="quick-action" onclick="showScreen('screen-profile')">
-                    <div class="icon">&#128100;</div>
-                    <div class="label">Profile</div>
+                <div class="quick-action" onclick="showScreen('screen-courses')">
+                    <div class="icon">&#127891;</div>
+                    <div class="label">Courses</div>
+                </div>
+            </div>
+
+            <!-- Recommended Jobs -->
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:4px 16px 8px;">
+                <span class="section-title" style="padding:0;">Recommended for You</span>
+                <span style="font-size:13px; color:var(--primary); font-weight:500; cursor:pointer;" onclick="showScreen('screen-search')">See All</span>
+            </div>
+            <div style="overflow-x:auto; display:flex; gap:12px; padding:0 16px 16px; -webkit-overflow-scrolling:touch;">
+                <div style="min-width:240px; background:white; border-radius:10px; padding:14px; cursor:pointer;" onclick="showScreen('screen-job-detail')">
+                    <div style="display:flex; gap:10px; margin-bottom:8px;">
+                        <div class="company-logo" style="width:36px; height:36px; font-size:12px;">DB</div>
+                        <div>
+                            <div style="font-size:14px; font-weight:600;">Senior Software Engineer</div>
+                            <div style="font-size:12px; color:var(--text-secondary);">Dialog Broadband</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <span class="meta-tag" style="font-size:11px;">&#128205; Colombo</span>
+                        <span class="meta-tag" style="font-size:11px;">&#128339; 12 days left</span>
+                    </div>
+                </div>
+                <div style="min-width:240px; background:white; border-radius:10px; padding:14px; cursor:pointer;" onclick="showScreen('screen-job-detail')">
+                    <div style="display:flex; gap:10px; margin-bottom:8px;">
+                        <div class="company-logo" style="width:36px; height:36px; font-size:12px; background:#e8f5e9; color:#2e7d32;">WS</div>
+                        <div>
+                            <div style="font-size:14px; font-weight:600;">Full Stack Developer</div>
+                            <div style="font-size:12px; color:var(--text-secondary);">WSO2 Lanka</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <span class="meta-tag" style="font-size:11px;">&#128205; Colombo</span>
+                        <span class="urgent-tag">Urgent</span>
+                    </div>
+                </div>
+                <div style="min-width:240px; background:white; border-radius:10px; padding:14px; cursor:pointer;" onclick="showScreen('screen-job-detail')">
+                    <div style="display:flex; gap:10px; margin-bottom:8px;">
+                        <div class="company-logo" style="width:36px; height:36px; font-size:12px; background:#fce4ec; color:#c62828;">99X</div>
+                        <div>
+                            <div style="font-size:14px; font-weight:600;">Lead Engineer</div>
+                            <div style="font-size:12px; color:var(--text-secondary);">99X Technology</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <span class="meta-tag" style="font-size:11px;">&#128205; Colombo</span>
+                        <span class="remote-tag">Remote</span>
+                    </div>
                 </div>
             </div>
 
@@ -1170,7 +1255,7 @@
             <span class="filter-chip">Applied (6)</span>
             <span class="filter-chip">Shortlisted (3)</span>
             <span class="filter-chip">Interview (2)</span>
-            <span class="filter-chip">Draft (1)</span>
+            <span class="filter-chip" onclick="showScreen('screen-drafts')">Draft (1)</span>
         </div>
         <div class="content">
             <div class="job-card">
@@ -1358,6 +1443,18 @@
                 <div class="premium-badge">&#11088; Premium Member - 245 days left</div>
             </div>
 
+            <!-- Profile Completion -->
+            <div style="margin:16px; background:white; border-radius:12px; padding:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:13px; font-weight:600; color:var(--text);">Profile Completion</span>
+                    <span style="font-size:13px; font-weight:700; color:var(--primary);">75%</span>
+                </div>
+                <div style="height:8px; background:var(--ash); border-radius:4px; overflow:hidden;">
+                    <div style="width:75%; height:100%; background:var(--primary); border-radius:4px;"></div>
+                </div>
+                <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Add your personal summary and LinkedIn URL to reach 100%</div>
+            </div>
+
             <div class="profile-section">
                 <h3>Personal Info</h3>
                 <div style="background:white; border-radius:12px; padding:4px 16px;">
@@ -1409,6 +1506,27 @@
                         <p>Uploaded Feb 10, 2026</p>
                     </div>
                     <div style="color:var(--text-secondary);">&#10095;</div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Quick Links</h3>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <div style="background:white; border-radius:10px; padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="showScreen('screen-courses')">
+                        <span style="font-size:20px;">&#127891;</span>
+                        <span style="flex:1; font-size:14px; font-weight:500;">Online Courses</span>
+                        <span style="color:var(--text-secondary);">&#10095;</span>
+                    </div>
+                    <div style="background:white; border-radius:10px; padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="showScreen('screen-premium')">
+                        <span style="font-size:20px;">&#11088;</span>
+                        <span style="flex:1; font-size:14px; font-weight:500;">Premium Membership</span>
+                        <span style="font-size:12px; font-weight:600; color:var(--success);">Active</span>
+                    </div>
+                    <div style="background:white; border-radius:10px; padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="showScreen('screen-drafts')">
+                        <span style="font-size:20px;">&#128221;</span>
+                        <span style="flex:1; font-size:14px; font-weight:500;">Draft Applications</span>
+                        <span style="font-size:12px; font-weight:600; color:var(--text-muted);">1</span>
+                    </div>
                 </div>
             </div>
 
@@ -1548,18 +1666,26 @@
             <h1>Search Jobs</h1>
             <button class="header-btn" onclick="showScreen('screen-filters')">&#9776;</button>
         </div>
-        <div class="search-bar-row">
-            <input class="form-input" placeholder="Job title, keyword..." value="Software Engineer">
+        <div class="search-bar-row" style="flex-wrap:wrap;">
+            <input class="form-input" placeholder="Job title, keyword..." value="Software Engineer" style="flex:1; min-width:0;">
+            <input class="form-input" placeholder="Location..." value="Colombo" style="flex:0 0 110px;">
             <button class="search-go" onclick="showScreen('screen-search')">&#128269;</button>
         </div>
         <div class="filter-bar">
             <span class="filter-chip active">All</span>
-            <span class="filter-chip">Colombo</span>
+            <span class="filter-chip active">Colombo</span>
             <span class="filter-chip">Full-time</span>
             <span class="filter-chip">IT</span>
             <span class="filter-chip">Remote</span>
         </div>
-        <div class="search-result-count"><strong>48 jobs</strong> found for "Software Engineer"</div>
+        <div class="search-result-count" style="display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>48 jobs</strong> found</span>
+            <select style="border:1px solid var(--border); border-radius:6px; padding:4px 8px; font-size:12px; font-family:'Poppins',sans-serif; color:var(--text-secondary); background:white;">
+                <option>Default</option>
+                <option>Most Recent</option>
+                <option>Oldest</option>
+            </select>
+        </div>
         <div class="content">
             <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
                 <div class="job-card-header">
@@ -1576,8 +1702,10 @@
                     <span class="remote-tag">Remote</span>
                 </div>
                 <div class="job-card-footer">
-                    <span class="applied-date">Posted 2 hours ago</span>
-                    <button class="save-btn">&#9825;</button>
+                    <span class="applied-date">&#128339; 28 days left</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="save-btn" onclick="event.stopPropagation(); this.innerHTML=this.innerHTML==='&#9825;'?'&#9829;':'&#9825;'">&#9825;</button>
+                    </div>
                 </div>
             </div>
             <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
@@ -1595,8 +1723,10 @@
                     <span class="urgent-tag">Urgent</span>
                 </div>
                 <div class="job-card-footer">
-                    <span class="applied-date">Posted 1 day ago</span>
-                    <button class="save-btn">&#9825;</button>
+                    <span class="applied-date">&#128339; 3 days left</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="save-btn" onclick="event.stopPropagation(); this.innerHTML=this.innerHTML==='&#9825;'?'&#9829;':'&#9825;'">&#9825;</button>
+                    </div>
                 </div>
             </div>
             <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
@@ -1611,10 +1741,13 @@
                     <span class="meta-tag">&#128205; Colombo</span>
                     <span class="meta-tag">&#128188; Full-time</span>
                     <span class="meta-tag">&#128176; LKR 180K-280K</span>
+                    <span class="status-badge status-applied" style="font-size:11px; padding:3px 8px;">Already Applied</span>
                 </div>
                 <div class="job-card-footer">
-                    <span class="applied-date">Posted 3 days ago</span>
-                    <button class="save-btn">&#9825;</button>
+                    <span class="applied-date">&#128339; 14 days left</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="save-btn" onclick="event.stopPropagation(); this.innerHTML=this.innerHTML==='&#9825;'?'&#9829;':'&#9825;'">&#9825;</button>
+                    </div>
                 </div>
             </div>
             <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
@@ -1629,10 +1762,13 @@
                     <span class="meta-tag">&#128205; Colombo</span>
                     <span class="meta-tag">&#128188; Full-time</span>
                     <span class="meta-tag">&#128176; LKR 100K-150K</span>
+                    <span style="display:inline-block; background:var(--primary); color:white; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;">CV-less</span>
                 </div>
                 <div class="job-card-footer">
-                    <span class="applied-date">Posted 5 days ago</span>
-                    <button class="save-btn">&#9829;</button>
+                    <span class="applied-date">&#128339; 21 days left</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="save-btn" onclick="event.stopPropagation(); this.innerHTML=this.innerHTML==='&#9825;'?'&#9829;':'&#9825;'">&#9829;</button>
+                    </div>
                 </div>
             </div>
             <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
@@ -1650,8 +1786,10 @@
                     <span class="remote-tag">Remote</span>
                 </div>
                 <div class="job-card-footer">
-                    <span class="applied-date">Posted 1 week ago</span>
-                    <button class="save-btn">&#9825;</button>
+                    <span class="applied-date">&#128339; 7 days left</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="save-btn" onclick="event.stopPropagation(); this.innerHTML=this.innerHTML==='&#9825;'?'&#9829;':'&#9825;'">&#9825;</button>
+                    </div>
                 </div>
             </div>
             <br>
@@ -1717,20 +1855,38 @@
             </div>
             <div class="filter-section">
                 <h3>Posted Within</h3>
-                <div class="filter-option-list">
-                    <span class="filter-option">24 hours</span>
-                    <span class="filter-option selected">7 days</span>
-                    <span class="filter-option">14 days</span>
-                    <span class="filter-option">30 days</span>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <label style="display:flex; align-items:center; gap:10px; font-size:14px; cursor:pointer;">
+                        <input type="radio" name="posted" style="accent-color:var(--primary); width:18px; height:18px;"> Any Time
+                    </label>
+                    <label style="display:flex; align-items:center; gap:10px; font-size:14px; cursor:pointer;">
+                        <input type="radio" name="posted" style="accent-color:var(--primary); width:18px; height:18px;"> Last 24 Hours
+                    </label>
+                    <label style="display:flex; align-items:center; gap:10px; font-size:14px; cursor:pointer;">
+                        <input type="radio" name="posted" checked style="accent-color:var(--primary); width:18px; height:18px;"> Last 7 Days
+                    </label>
+                    <label style="display:flex; align-items:center; gap:10px; font-size:14px; cursor:pointer;">
+                        <input type="radio" name="posted" style="accent-color:var(--primary); width:18px; height:18px;"> Last 2 Weeks
+                    </label>
+                    <label style="display:flex; align-items:center; gap:10px; font-size:14px; cursor:pointer;">
+                        <input type="radio" name="posted" style="accent-color:var(--primary); width:18px; height:18px;"> Last Month
+                    </label>
                 </div>
             </div>
             <div class="filter-section">
-                <h3>Special</h3>
+                <h3>Remote</h3>
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <span style="font-size:14px; color:var(--text);">Work from Home</span>
+                    <div class="toggle on"></div>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Special Filters</h3>
                 <div class="filter-option-list">
                     <span class="filter-option">CV-less Apply</span>
                     <span class="filter-option">Walk-in</span>
                     <span class="filter-option">SLIM Required</span>
-                    <span class="filter-option">Remote</span>
+                    <span class="filter-option">Disability Friendly</span>
                 </div>
             </div>
         </div>
@@ -1758,9 +1914,20 @@
                     <span class="meta-tag">&#128176; LKR 200K-350K</span>
                     <span class="remote-tag">Remote</span>
                 </div>
-                <div style="margin-top:12px; font-size:12px; color:var(--text-secondary);">
-                    Posted Feb 17, 2026 &bull; Expires in 12 days &bull; 234 views
+                <div style="margin-top:8px; display:flex; align-items:center; justify-content:center; gap:4px; font-size:12px; color:var(--danger); font-weight:600;">
+                    &#128339; 12 days left
                 </div>
+                <div style="margin-top:4px; font-size:11px; color:var(--text-muted);">
+                    234 views &bull; Posted Feb 17, 2026
+                </div>
+            </div>
+
+            <!-- Share Section -->
+            <div style="display:flex; justify-content:center; gap:12px; padding:12px 16px; background:white; border-bottom:1px solid var(--border);">
+                <button style="padding:8px 14px; border:1px solid #4267B2; border-radius:8px; background:white; color:#4267B2; font-size:12px; font-weight:600; cursor:pointer;">f Facebook</button>
+                <button style="padding:8px 14px; border:1px solid #0072B1; border-radius:8px; background:white; color:#0072B1; font-size:12px; font-weight:600; cursor:pointer;">in LinkedIn</button>
+                <button style="padding:8px 14px; border:1px solid #25D366; border-radius:8px; background:white; color:#25D366; font-size:12px; font-weight:600; cursor:pointer;">&#128172; WhatsApp</button>
+                <button style="padding:8px 14px; border:1px solid var(--border); border-radius:8px; background:white; color:var(--text-secondary); font-size:12px; font-weight:600; cursor:pointer;">&#128279; Copy</button>
             </div>
 
             <div class="detail-section">
@@ -1820,6 +1987,18 @@
                     <li>Learning & development budget</li>
                     <li>Free Dialog mobile connection</li>
                 </ul>
+            </div>
+
+            <!-- Job Video -->
+            <div class="detail-section">
+                <h3>Job Video</h3>
+                <div style="background:var(--bg); border-radius:10px; padding:40px 16px; text-align:center; position:relative;">
+                    <div style="width:56px; height:56px; background:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; cursor:pointer;">
+                        <span style="color:white; font-size:24px; margin-left:3px;">&#9654;</span>
+                    </div>
+                    <div style="font-size:13px; color:var(--text-secondary);">Watch company overview video</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">2:34 &bull; YouTube</div>
+                </div>
             </div>
 
             <div class="detail-section">
@@ -1886,6 +2065,10 @@
                     <input class="form-input" type="email" value="kamal@email.com">
                 </div>
                 <div class="form-group">
+                    <label>Phone Number</label>
+                    <input class="form-input" type="tel" value="+94 77 123 4567">
+                </div>
+                <div class="form-group">
                     <label>Cover Letter (Optional)</label>
                     <textarea placeholder="Tell the employer why you're a great fit for this role...">Dear Hiring Manager,
 
@@ -1913,14 +2096,112 @@ Kamal Perera</textarea>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" onclick="showScreen('screen-apply-success')">Submit Application</button>
+                <button class="btn btn-primary" onclick="showScreen('screen-screening')">Submit Application</button>
                 <br>
                 <button class="btn btn-outline" style="margin-top:10px;" onclick="showScreen('screen-job-detail')">Save as Draft</button>
             </div>
         </div>
     </div>
 
-    <!-- =================== 14. APPLY SUCCESS =================== -->
+    <!-- =================== 14. SCREENING QUESTIONS =================== -->
+    <div class="screen" id="screen-screening">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-job-apply')">&larr;</button>
+            <h1>Screening Questions</h1>
+        </div>
+        <div class="content">
+            <div style="background:white; padding:14px 16px; border-bottom:1px solid var(--border);">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <div style="flex:1; height:4px; background:var(--primary); border-radius:2px;"></div>
+                    <div style="flex:1; height:4px; background:var(--primary); border-radius:2px;"></div>
+                    <div style="flex:1; height:4px; background:var(--ash); border-radius:2px;"></div>
+                </div>
+                <div style="font-size:12px; color:var(--text-muted); margin-top:6px; text-align:center;">Step 2 of 3 - Employer Questions</div>
+            </div>
+            <div class="apply-section">
+                <div class="form-group">
+                    <label>1. How many years of experience do you have with Java?</label>
+                    <select class="form-input" style="appearance:auto;">
+                        <option>Select an option</option>
+                        <option>Less than 1 year</option>
+                        <option>1-3 years</option>
+                        <option selected>3-5 years</option>
+                        <option>5+ years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>2. Are you familiar with AWS cloud services?</label>
+                    <div style="display:flex; gap:16px; padding:8px 0;">
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; cursor:pointer;">
+                            <input type="radio" name="q2" checked style="accent-color:var(--primary); width:18px; height:18px;"> Yes
+                        </label>
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; cursor:pointer;">
+                            <input type="radio" name="q2" style="accent-color:var(--primary); width:18px; height:18px;"> No
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>3. What is your expected monthly salary (LKR)?</label>
+                    <input class="form-input" placeholder="e.g. 300000" value="300000">
+                </div>
+                <div class="form-group">
+                    <label>4. Are you willing to relocate?</label>
+                    <div style="display:flex; gap:16px; padding:8px 0;">
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; cursor:pointer;">
+                            <input type="radio" name="q4" checked style="accent-color:var(--primary); width:18px; height:18px;"> Yes
+                        </label>
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; font-weight:400; cursor:pointer;">
+                            <input type="radio" name="q4" style="accent-color:var(--primary); width:18px; height:18px;"> No
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>5. Briefly describe a challenging project you led.</label>
+                    <textarea placeholder="Describe your experience...">Led a microservices migration for a payment platform serving 2M+ users, reducing response times by 40% while maintaining zero downtime.</textarea>
+                </div>
+                <button class="btn btn-primary" onclick="showScreen('screen-apply-success')">Submit Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 15. CV-LESS PRE-APPLICATION =================== -->
+    <div class="screen" id="screen-cvless-apply">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-job-detail')">&larr;</button>
+            <h1>Quick Apply</h1>
+        </div>
+        <div class="content">
+            <div style="background:var(--primary-light); padding:14px 16px; border-bottom:1px solid var(--primary-sharp); display:flex; align-items:center; gap:10px;">
+                <span style="font-size:18px;">&#128196;</span>
+                <div style="font-size:13px; color:var(--primary); font-weight:500;">No CV required for this application</div>
+            </div>
+            <div class="apply-section">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input class="form-input" value="Kamal Perera">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-input" type="email" value="kamal@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input class="form-input" type="tel" value="+94 77 123 4567">
+                </div>
+                <div class="form-group">
+                    <label>Why are you interested in this role?</label>
+                    <textarea placeholder="Tell the employer about yourself..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="showScreen('screen-apply-success')">Submit Application</button>
+                <div style="text-align:center; margin-top:16px;">
+                    <span style="font-size:13px; color:var(--text-muted);">Want to stand out?</span>
+                    <a href="#" onclick="showScreen('screen-job-apply'); return false;" style="font-size:13px; color:var(--primary); font-weight:600; text-decoration:none; margin-left:4px;">Apply with CV instead</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 16. APPLY SUCCESS =================== -->
     <div class="screen" id="screen-apply-success">
         <div class="content" style="display:flex; flex-direction:column; justify-content:center; padding-bottom:0;">
             <div class="apply-success">
@@ -1933,7 +2214,186 @@ Kamal Perera</textarea>
         </div>
     </div>
 
-    <!-- =================== 15. SETTINGS =================== -->
+    <!-- =================== DRAFTS =================== -->
+    <div class="screen" id="screen-drafts">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-applications')">&larr;</button>
+            <h1>Draft Applications</h1>
+        </div>
+        <div class="content">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#fff3e0; color:#e65100;">HL</div>
+                    <div class="job-info">
+                        <h3>Accountant</h3>
+                        <span class="company">Hayleys PLC</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Galle</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-draft">Draft</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Saved Feb 12, 2026</span>
+                    <button class="btn btn-primary" style="width:auto; padding:8px 16px; font-size:13px;" onclick="showScreen('screen-job-apply')">Resume</button>
+                </div>
+            </div>
+            <div style="padding:32px; text-align:center;">
+                <p style="font-size:13px; color:var(--text-muted);">Draft applications are saved for 30 days. Complete them before they expire.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 17. PREMIUM MEMBERSHIP =================== -->
+    <div class="screen" id="screen-premium">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-settings')">&larr;</button>
+            <h1>Premium</h1>
+        </div>
+        <div class="content">
+            <div style="background:linear-gradient(135deg, var(--accent), #c77800); margin:16px; border-radius:16px; padding:24px; color:white; text-align:center;">
+                <div style="font-size:36px; margin-bottom:8px;">&#11088;</div>
+                <h2 style="font-size:22px; font-weight:700; margin-bottom:4px;">XpressJobs Premium</h2>
+                <p style="font-size:14px; opacity:0.9;">Stand out from other candidates</p>
+                <div style="font-size:32px; font-weight:700; margin:16px 0 4px;">LKR 500</div>
+                <div style="font-size:13px; opacity:0.8;">per year</div>
+            </div>
+            <div style="padding:0 16px;">
+                <h3 style="font-size:14px; font-weight:700; margin-bottom:12px; color:var(--text);">BENEFITS</h3>
+            </div>
+            <div style="padding:0 16px; display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+                <div style="display:flex; align-items:center; gap:12px; background:white; border-radius:10px; padding:14px;">
+                    <span style="font-size:20px;">&#128081;</span>
+                    <div>
+                        <div style="font-size:14px; font-weight:600;">Top Profile in Search</div>
+                        <div style="font-size:12px; color:var(--text-muted);">Recruiters see your profile first</div>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px; background:white; border-radius:10px; padding:14px;">
+                    <span style="font-size:20px;">&#10024;</span>
+                    <div>
+                        <div style="font-size:14px; font-weight:600;">Highlighted Applications</div>
+                        <div style="font-size:12px; color:var(--text-muted);">Your applications stand out to employers</div>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px; background:white; border-radius:10px; padding:14px;">
+                    <span style="font-size:20px;">&#128683;</span>
+                    <div>
+                        <div style="font-size:14px; font-weight:600;">Ad-free Experience</div>
+                        <div style="font-size:12px; color:var(--text-muted);">Browse jobs without distractions</div>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px; background:white; border-radius:10px; padding:14px;">
+                    <span style="font-size:20px;">&#128196;</span>
+                    <div>
+                        <div style="font-size:14px; font-weight:600;">Biodata & Profile Features</div>
+                        <div style="font-size:12px; color:var(--text-muted);">Enhanced profile visibility</div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:0 16px 24px;">
+                <div style="background:var(--success-light); border:1px solid var(--success); border-radius:10px; padding:12px 16px; display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+                    <span style="font-size:16px;">&#10003;</span>
+                    <span style="font-size:13px; font-weight:600; color:var(--success);">Your premium is active - 245 days remaining</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 18. QUIZ / ASSESSMENT =================== -->
+    <div class="screen" id="screen-quiz">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-job-detail')">&larr;</button>
+            <h1>Job Assessment</h1>
+        </div>
+        <div class="content">
+            <div style="background:white; padding:16px; border-bottom:1px solid var(--border);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:13px; font-weight:600; color:var(--text);">Question 3 of 10</span>
+                    <span style="font-size:13px; font-weight:600; color:var(--primary);">&#128339; 12:45</span>
+                </div>
+                <div style="height:6px; background:var(--ash); border-radius:3px; overflow:hidden;">
+                    <div style="width:30%; height:100%; background:var(--primary); border-radius:3px;"></div>
+                </div>
+            </div>
+            <div class="apply-section">
+                <div style="background:white; border-radius:12px; padding:20px; margin-bottom:16px;">
+                    <h3 style="font-size:16px; font-weight:600; color:var(--text); margin-bottom:16px; line-height:1.5;">Which design pattern is best suited for creating objects without specifying their exact class?</h3>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <label style="display:flex; align-items:center; gap:12px; padding:14px; background:var(--bg); border-radius:10px; cursor:pointer; border:1.5px solid transparent;">
+                            <input type="radio" name="quiz" style="accent-color:var(--primary); width:18px; height:18px;"> <span style="font-size:14px;">Singleton Pattern</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:14px; background:var(--primary-light); border-radius:10px; cursor:pointer; border:1.5px solid var(--primary);">
+                            <input type="radio" name="quiz" checked style="accent-color:var(--primary); width:18px; height:18px;"> <span style="font-size:14px;">Factory Pattern</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:14px; background:var(--bg); border-radius:10px; cursor:pointer; border:1.5px solid transparent;">
+                            <input type="radio" name="quiz" style="accent-color:var(--primary); width:18px; height:18px;"> <span style="font-size:14px;">Observer Pattern</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:12px; padding:14px; background:var(--bg); border-radius:10px; cursor:pointer; border:1.5px solid transparent;">
+                            <input type="radio" name="quiz" style="accent-color:var(--primary); width:18px; height:18px;"> <span style="font-size:14px;">Strategy Pattern</span>
+                        </label>
+                    </div>
+                </div>
+                <div style="display:flex; gap:12px;">
+                    <button class="btn btn-outline" style="flex:1;">Previous</button>
+                    <button class="btn btn-primary" style="flex:1;">Next</button>
+                </div>
+                <div style="text-align:center; margin-top:12px; font-size:12px; color:var(--text-muted);">You can only take this assessment once</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 19. ONLINE COURSES =================== -->
+    <div class="screen" id="screen-courses">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-profile')">&larr;</button>
+            <h1>Online Courses</h1>
+        </div>
+        <div class="content">
+            <div style="padding:16px;">
+                <div style="background:var(--primary-light); border-radius:12px; padding:20px; text-align:center; margin-bottom:16px;">
+                    <div style="font-size:36px; margin-bottom:8px;">&#127891;</div>
+                    <h3 style="font-size:16px; font-weight:600; margin-bottom:4px;">Upskill Yourself</h3>
+                    <p style="font-size:13px; color:var(--text-secondary);">Browse professional courses to boost your career</p>
+                </div>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:var(--primary-light);">&#128187;</div>
+                <div class="cv-info">
+                    <h4>Full Stack Web Development</h4>
+                    <p>12 weeks &bull; Beginner to Advanced</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:var(--success-light);">&#128202;</div>
+                <div class="cv-info">
+                    <h4>Data Science with Python</h4>
+                    <p>8 weeks &bull; Intermediate</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:var(--warning-light);">&#128640;</div>
+                <div class="cv-info">
+                    <h4>Digital Marketing Essentials</h4>
+                    <p>6 weeks &bull; Beginner</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:var(--danger-light);">&#127912;</div>
+                <div class="cv-info">
+                    <h4>UI/UX Design Masterclass</h4>
+                    <p>10 weeks &bull; All Levels</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 20. SETTINGS =================== -->
     <div class="screen" id="screen-settings">
         <div class="header">
             <button class="back-btn" onclick="showScreen('screen-profile')">&larr;</button>
@@ -1978,9 +2438,20 @@ Kamal Perera</textarea>
             </div>
 
             <div class="settings-group">
-                <div class="settings-group-title">Premium</div>
+                <div class="settings-group-title">Privacy</div>
                 <div class="settings-list">
                     <div class="settings-item">
+                        <span class="icon">&#128196;</span>
+                        <span class="label">Share CV Publicly</span>
+                        <div class="toggle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-group-title">Premium</div>
+                <div class="settings-list">
+                    <div class="settings-item" onclick="showScreen('screen-premium')">
                         <span class="icon">&#11088;</span>
                         <span class="label">Premium Membership</span>
                         <span style="font-size:13px; color:var(--success); font-weight:600;">Active</span>
@@ -2015,13 +2486,35 @@ Kamal Perera</textarea>
                         <span class="icon">&#128682;</span>
                         <span class="label" style="color:var(--danger);">Sign Out</span>
                     </div>
-                    <div class="settings-item danger">
+                    <div class="settings-item danger" onclick="showScreen('screen-delete-account')">
                         <span class="icon">&#128465;</span>
                         <span class="label">Delete Account</span>
+                        <span class="arrow">&#10095;</span>
                     </div>
                 </div>
             </div>
             <br>
+        </div>
+    </div>
+
+    <!-- =================== DELETE ACCOUNT =================== -->
+    <div class="screen" id="screen-delete-account">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-settings')">&larr;</button>
+            <h1>Delete Account</h1>
+        </div>
+        <div class="content">
+            <div style="padding:32px 24px; text-align:center;">
+                <div style="width:64px; height:64px; background:var(--danger-light); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:28px;">&#9888;</div>
+                <h2 style="font-size:18px; font-weight:700; margin-bottom:8px; color:var(--danger);">Delete Your Account?</h2>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin-bottom:24px;">This action is permanent and cannot be undone. All your data, applications, and saved jobs will be permanently deleted.</p>
+                <div class="form-group" style="text-align:left;">
+                    <label>Enter your password to confirm</label>
+                    <input class="form-input" type="password" placeholder="Your current password">
+                </div>
+                <button class="btn" style="background:var(--danger); color:white; margin-bottom:12px;">Permanently Delete Account</button>
+                <button class="btn btn-outline" onclick="showScreen('screen-settings')">Cancel</button>
+            </div>
         </div>
     </div>
 
