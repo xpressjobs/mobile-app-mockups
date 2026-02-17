@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XpressJobs - Candidate Mobile App Mockup</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #01a9e0;
+            --primary-dark: #0190be;
+            --primary-light: #e6f7fc;
+            --accent: #ff9900;
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --text: #0b132b;
+            --text-secondary: #515151;
+            --border: #dedede;
+            --success: #008a00;
+            --warning: #ff9900;
+            --danger: #e60000;
+            --tab-height: 64px;
+            --status-bar: 44px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: #0b132b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            background: var(--bg);
+            border-radius: 44px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5), inset 0 0 0 2px #333;
+        }
+
+        .status-bar {
+            height: var(--status-bar);
+            background: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-bar .right { display: flex; gap: 6px; align-items: center; }
+
+        /* Screen container */
+        .screen {
+            display: none;
+            height: calc(100% - var(--status-bar));
+            flex-direction: column;
+            position: relative;
+        }
+        .screen.active { display: flex; }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 56px;
+        }
+        .header h1 { font-size: 18px; font-weight: 600; flex: 1; }
+        .header-btn {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.15);
+            border: none; border-radius: 50%;
+            color: white; font-size: 18px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Scrollable content */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: var(--tab-height);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Bottom Tab Bar */
+        .tab-bar {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: var(--tab-height);
+            background: white;
+            display: flex;
+            border-top: 1px solid var(--border);
+            z-index: 100;
+        }
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 500;
+            border: none;
+            background: none;
+            transition: color 0.2s;
+        }
+        .tab-item.active { color: var(--primary); }
+        .tab-item svg { width: 24px; height: 24px; }
+        .tab-item .badge {
+            position: absolute;
+            top: 6px;
+            right: calc(50% - 16px);
+            background: var(--danger);
+            color: white;
+            font-size: 10px;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            margin: 12px 16px;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        /* =================== LOGIN SCREEN =================== */
+        .login-screen .content {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+        .login-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #017a9e 100%);
+            padding: 48px 32px 40px;
+            text-align: center;
+            color: white;
+        }
+        .login-hero .logo {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .login-hero .logo span { color: var(--accent); }
+        .login-hero p { opacity: 0.85; font-size: 14px; }
+
+        .login-form {
+            padding: 32px 24px;
+            flex: 1;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: border 0.2s;
+            background: var(--bg);
+        }
+        .form-input:focus { border-color: var(--primary); background: white; }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:active { background: var(--primary-dark); transform: scale(0.98); }
+        .btn-outline {
+            background: white;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+        .forgot-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .social-buttons { display: flex; gap: 12px; margin-bottom: 24px; }
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .social-btn img { width: 20px; height: 20px; }
+
+        .register-link {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .register-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+
+        /* =================== REGISTER SCREEN =================== */
+        .register-steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            background: white;
+        }
+        .step {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .step.active { background: var(--primary); color: white; }
+        .step.done { background: var(--success); color: white; }
+        .step.pending { background: var(--border); color: var(--text-secondary); }
+        .step-line { width: 32px; height: 2px; background: var(--border); align-self: center; }
+        .step-line.done { background: var(--success); }
+
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 32px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border 0.2s;
+        }
+        .upload-area:hover { border-color: var(--primary); }
+        .upload-icon { font-size: 40px; margin-bottom: 8px; }
+        .upload-area p { font-size: 14px; color: var(--text-secondary); }
+        .upload-area .format { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+        /* =================== HOME / DASHBOARD =================== */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary), #017a9e);
+            margin: 16px;
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+        }
+        .welcome-banner h2 { font-size: 20px; margin-bottom: 4px; }
+        .welcome-banner p { font-size: 13px; opacity: 0.85; }
+        .welcome-stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .stat-pill {
+            flex: 1;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+        .stat-pill .num { font-size: 22px; font-weight: 700; }
+        .stat-pill .label { font-size: 11px; opacity: 0.85; }
+
+        .section-title {
+            padding: 4px 16px 8px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+        .quick-action {
+            background: white;
+            border-radius: 12px;
+            padding: 14px 8px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            cursor: pointer;
+        }
+        .quick-action .icon {
+            width: 40px; height: 40px;
+            background: #e6f7fc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 20px;
+        }
+        .quick-action .label { font-size: 11px; font-weight: 500; color: var(--text); }
+
+        /* =================== JOB APPLICATION CARD =================== */
+        .job-card {
+            background: white;
+            margin: 8px 16px;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .job-card-header { display: flex; gap: 12px; margin-bottom: 12px; }
+        .company-logo {
+            width: 44px; height: 44px;
+            background: #e6f7fc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .job-info h3 { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.3; }
+        .job-info .company { font-size: 13px; color: var(--text-secondary); }
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .meta-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: var(--bg);
+            color: var(--text-secondary);
+        }
+        .status-badge {
+            display: inline-block;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .status-applied { background: #e6f7fc; color: #0190be; }
+        .status-shortlisted { background: #d1fae5; color: #047857; }
+        .status-interview { background: #fef3c7; color: #92400e; }
+        .status-rejected { background: #fee2e2; color: #b91c1c; }
+        .status-draft { background: #f3f4f6; color: #6b7280; }
+
+        .job-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .applied-date { font-size: 12px; color: var(--text-secondary); }
+        .save-btn {
+            border: none; background: none;
+            cursor: pointer; font-size: 20px;
+        }
+
+        /* =================== PROFILE SCREEN =================== */
+        .profile-header-card {
+            background: linear-gradient(135deg, var(--primary), #017a9e);
+            margin: 0;
+            padding: 24px 20px 20px;
+            color: white;
+            text-align: center;
+        }
+        .avatar {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        .profile-name { font-size: 20px; font-weight: 700; }
+        .profile-title { font-size: 14px; opacity: 0.85; margin-top: 2px; }
+        .profile-location { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .profile-section { padding: 16px; }
+        .profile-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .profile-field:last-child { border-bottom: none; }
+        .field-label { font-size: 14px; color: var(--text-secondary); }
+        .field-value { font-size: 14px; color: var(--text); font-weight: 500; text-align: right; max-width: 60%; }
+
+        .sector-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .sector-tag {
+            background: #e6f7fc;
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* =================== SAVED JOBS =================== */
+        .saved-job-card {
+            background: white;
+            margin: 8px 16px;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            position: relative;
+        }
+        .bookmark-icon {
+            position: absolute;
+            top: 16px; right: 16px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* =================== CV MANAGEMENT =================== */
+        .cv-card {
+            background: white;
+            margin: 8px 16px;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .cv-icon {
+            width: 48px; height: 48px;
+            background: #fee2e2;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .cv-info { flex: 1; }
+        .cv-info h4 { font-size: 14px; font-weight: 600; }
+        .cv-info p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+        .cv-actions { display: flex; gap: 8px; }
+        .cv-action-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =================== SEARCH HISTORY =================== */
+        .search-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+        }
+        .search-icon { font-size: 18px; color: var(--text-secondary); }
+        .search-text { flex: 1; }
+        .search-text h4 { font-size: 14px; font-weight: 500; }
+        .search-text p { font-size: 12px; color: var(--text-secondary); }
+        .search-delete { font-size: 16px; color: var(--text-secondary); cursor: pointer; }
+
+        /* =================== SETTINGS =================== */
+        .settings-group { margin: 16px; }
+        .settings-group-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+        .settings-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            gap: 12px;
+        }
+        .settings-item:last-child { border-bottom: none; }
+        .settings-item .icon { font-size: 20px; width: 28px; text-align: center; }
+        .settings-item .label { flex: 1; font-size: 15px; }
+        .settings-item .arrow { color: var(--text-secondary); }
+        .settings-item.danger .label { color: var(--danger); }
+
+        .toggle {
+            width: 48px; height: 28px;
+            background: var(--border);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .toggle.on { background: var(--success); }
+        .toggle::after {
+            content: '';
+            width: 24px; height: 24px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px; left: 2px;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .toggle.on::after { transform: translateX(20px); }
+
+        /* =================== FILTER BAR =================== */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+        .filter-chip {
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            border: 1.5px solid var(--border);
+            background: white;
+            color: var(--text-secondary);
+        }
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Screen navigation buttons */
+        .nav-link { color: var(--primary); cursor: pointer; text-decoration: none; font-weight: 500; }
+        .back-btn {
+            border: none; background: none;
+            color: white; font-size: 22px;
+            cursor: pointer; padding: 0;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 48px 32px;
+            color: var(--text-secondary);
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+        .empty-state h3 { font-size: 16px; color: var(--text); margin-bottom: 4px; }
+        .empty-state p { font-size: 14px; }
+
+        /* =================== JOB SEARCH =================== */
+        .search-bar-row {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--primary);
+        }
+        .search-bar-row .form-input {
+            flex: 1;
+            padding: 12px 14px;
+            font-size: 14px;
+            border: none;
+            background: white;
+        }
+        .search-bar-row .search-go {
+            width: 44px;
+            background: var(--accent);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .search-result-count {
+            padding: 10px 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+        .search-result-count strong { color: var(--text); }
+        .job-card.clickable { cursor: pointer; transition: box-shadow 0.2s; }
+        .job-card.clickable:active { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+
+        /* =================== JOB DETAIL =================== */
+        .job-detail-hero {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .job-detail-hero .company-logo {
+            width: 60px; height: 60px;
+            margin: 0 auto 12px;
+            font-size: 22px;
+        }
+        .job-detail-hero h2 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .job-detail-hero .company-name { font-size: 14px; color: var(--primary); font-weight: 500; }
+        .job-detail-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .detail-section {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+            margin-bottom: 8px;
+        }
+        .detail-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .detail-section p, .detail-section li {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .detail-section ul { padding-left: 18px; }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .detail-grid-item {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .detail-grid-item .label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.3px; }
+        .detail-grid-item .value { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 2px; }
+        .sticky-apply {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 12px 16px;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+        .sticky-apply .btn { flex: 1; }
+        .btn-save {
+            width: 48px;
+            flex: none !important;
+            background: var(--bg);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            font-size: 18px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .urgent-tag {
+            display: inline-block;
+            background: #fee2e2;
+            color: #b91c1c;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .remote-tag {
+            display: inline-block;
+            background: #d1fae5;
+            color: #047857;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .related-jobs-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 0 16px 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .related-job-mini {
+            min-width: 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            cursor: pointer;
+        }
+        .related-job-mini h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .related-job-mini .company { font-size: 12px; color: var(--text-secondary); }
+        .related-job-mini .meta-tag { font-size: 11px; margin-top: 8px; }
+
+        /* =================== JOB APPLY =================== */
+        .apply-section {
+            padding: 20px;
+        }
+        .apply-section .form-group { margin-bottom: 16px; }
+        .apply-section textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            background: var(--bg);
+            resize: vertical;
+            min-height: 100px;
+        }
+        .apply-section textarea:focus { border-color: var(--primary); background: white; }
+        .cv-select-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
+            cursor: pointer;
+        }
+        .cv-select-card.selected { border-color: var(--primary); background: #e6f7fc; }
+        .radio-dot {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            flex-shrink: 0;
+        }
+        .cv-select-card.selected .radio-dot {
+            border-color: var(--primary);
+            background: var(--primary);
+            box-shadow: inset 0 0 0 3px white;
+        }
+        .apply-success {
+            text-align: center;
+            padding: 60px 32px;
+        }
+        .apply-success .check {
+            width: 72px; height: 72px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+        .apply-success h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .apply-success p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 24px; }
+
+        /* =================== FILTER MODAL =================== */
+        .filter-section { padding: 16px; }
+        .filter-section h3 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        .filter-option-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .filter-option {
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1.5px solid var(--border);
+            background: white;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .filter-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .filter-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 12px 16px;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+        }
+        .filter-bottom .btn { flex: 1; }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <div class="right">
+            <span>&#9679;&#9679;&#9679;&#9679;</span>
+            <span>5G</span>
+            <span>&#128267;</span>
+        </div>
+    </div>
+
+    <!-- =================== 1. LOGIN SCREEN =================== -->
+    <div class="screen login-screen active" id="screen-login">
+        <div class="content" style="padding-bottom: 0;">
+            <div class="login-hero">
+                <div class="logo">Xpress<span>Jobs</span></div>
+                <p>Find your dream job in Sri Lanka</p>
+            </div>
+            <div class="login-form">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input class="form-input" type="email" placeholder="you@example.com" value="kamal@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-input" type="password" placeholder="Enter your password" value="********">
+                </div>
+                <div class="forgot-link">
+                    <a href="#" onclick="showScreen('screen-forgot')">Forgot Password?</a>
+                </div>
+                <button class="btn btn-primary" onclick="showScreen('screen-home')">Sign In</button>
+                <div class="divider">or continue with</div>
+                <div class="social-buttons">
+                    <button class="social-btn">&#x1F534; Google</button>
+                    <button class="social-btn">&#x1F535; LinkedIn</button>
+                    <button class="social-btn">&#x1F535; Facebook</button>
+                </div>
+                <div class="register-link">
+                    Don't have an account? <a href="#" onclick="showScreen('screen-register')">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 2. REGISTER SCREEN =================== -->
+    <div class="screen" id="screen-register">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-login')">&larr;</button>
+            <h1>Create Account</h1>
+        </div>
+        <div class="register-steps">
+            <div class="step active">1</div>
+            <div class="step-line"></div>
+            <div class="step pending">2</div>
+            <div class="step-line"></div>
+            <div class="step pending">3</div>
+        </div>
+        <div class="content">
+            <div style="padding: 20px 24px;">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input class="form-input" placeholder="Enter first name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input class="form-input" placeholder="Enter last name">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input class="form-input" type="email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-input" type="password" placeholder="Min 8 characters">
+                </div>
+                <div class="form-group">
+                    <label>Home Town</label>
+                    <input class="form-input" placeholder="Select your town">
+                </div>
+                <div class="form-group">
+                    <label>Upload CV</label>
+                    <div class="upload-area">
+                        <div class="upload-icon">&#128196;</div>
+                        <p>Tap to upload your CV</p>
+                        <span class="format">PDF, DOC, DOCX (Max 5MB)</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="showScreen('screen-home')">Create Account</button>
+                <br><br>
+                <div class="register-link">
+                    Already have an account? <a href="#" onclick="showScreen('screen-login')">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 3. FORGOT PASSWORD =================== -->
+    <div class="screen" id="screen-forgot">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-login')">&larr;</button>
+            <h1>Reset Password</h1>
+        </div>
+        <div class="content">
+            <div style="padding: 32px 24px; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 16px;">&#128274;</div>
+                <h2 style="font-size: 18px; margin-bottom: 8px;">Forgot your password?</h2>
+                <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 32px;">Enter your email address and we'll send you a link to reset your password.</p>
+                <div class="form-group" style="text-align: left;">
+                    <label>Email Address</label>
+                    <input class="form-input" type="email" placeholder="you@example.com">
+                </div>
+                <button class="btn btn-primary">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 4. HOME / DASHBOARD =================== -->
+    <div class="screen" id="screen-home">
+        <div class="header">
+            <h1>XpressJobs</h1>
+            <button class="header-btn" onclick="showScreen('screen-search')">&#128269;</button>
+            <button class="header-btn">&#128276;</button>
+        </div>
+        <div class="content">
+            <div class="welcome-banner">
+                <h2>Hi, Kamal &#128075;</h2>
+                <p>Ready to find your next opportunity?</p>
+                <div class="welcome-stats">
+                    <div class="stat-pill">
+                        <div class="num">12</div>
+                        <div class="label">Applied</div>
+                    </div>
+                    <div class="stat-pill">
+                        <div class="num">3</div>
+                        <div class="label">Shortlisted</div>
+                    </div>
+                    <div class="stat-pill">
+                        <div class="num">5</div>
+                        <div class="label">Saved</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Quick Actions</div>
+            <div class="quick-actions">
+                <div class="quick-action" onclick="showScreen('screen-applications')">
+                    <div class="icon">&#128203;</div>
+                    <div class="label">My Jobs</div>
+                </div>
+                <div class="quick-action" onclick="showScreen('screen-saved')">
+                    <div class="icon">&#128278;</div>
+                    <div class="label">Saved</div>
+                </div>
+                <div class="quick-action" onclick="showScreen('screen-cv')">
+                    <div class="icon">&#128196;</div>
+                    <div class="label">My CV</div>
+                </div>
+                <div class="quick-action" onclick="showScreen('screen-profile')">
+                    <div class="icon">&#128100;</div>
+                    <div class="label">Profile</div>
+                </div>
+            </div>
+
+            <div class="section-title">Recent Applications</div>
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">DB</div>
+                    <div class="job-info">
+                        <h3>Senior Software Engineer</h3>
+                        <span class="company">Dialog Broadband</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-shortlisted">Shortlisted</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied 3 days ago</span>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">VC</div>
+                    <div class="job-info">
+                        <h3>Marketing Executive</h3>
+                        <span class="company">Virtusa Corporation</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Kandy</span>
+                    <span class="meta-tag">&#128188; Contract</span>
+                    <span class="status-badge status-applied">Applied</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied 1 week ago</span>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">WS</div>
+                    <div class="job-info">
+                        <h3>UI/UX Designer</h3>
+                        <span class="company">WSO2 Lanka</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-interview">Interview</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied 2 weeks ago</span>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-item active" onclick="showScreen('screen-home')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                Home
+            </button>
+            <button class="tab-item" onclick="showScreen('screen-applications')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+                Applications
+            </button>
+            <button class="tab-item" onclick="showScreen('screen-saved')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+                Saved
+            </button>
+            <button class="tab-item" onclick="showScreen('screen-profile')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Profile
+            </button>
+        </div>
+    </div>
+
+    <!-- =================== 5. MY APPLICATIONS =================== -->
+    <div class="screen" id="screen-applications">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-home')">&larr;</button>
+            <h1>My Applications</h1>
+        </div>
+        <div class="filter-bar">
+            <span class="filter-chip active">All (12)</span>
+            <span class="filter-chip">Applied (6)</span>
+            <span class="filter-chip">Shortlisted (3)</span>
+            <span class="filter-chip">Interview (2)</span>
+            <span class="filter-chip">Draft (1)</span>
+        </div>
+        <div class="content">
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">DB</div>
+                    <div class="job-info">
+                        <h3>Senior Software Engineer</h3>
+                        <span class="company">Dialog Broadband</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-shortlisted">Shortlisted</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied Feb 14, 2026</span>
+                </div>
+            </div>
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">WS</div>
+                    <div class="job-info">
+                        <h3>UI/UX Designer</h3>
+                        <span class="company">WSO2 Lanka</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-interview">Interview</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied Feb 3, 2026</span>
+                </div>
+            </div>
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo">VC</div>
+                    <div class="job-info">
+                        <h3>Marketing Executive</h3>
+                        <span class="company">Virtusa Corporation</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Kandy</span>
+                    <span class="meta-tag">&#128188; Contract</span>
+                    <span class="status-badge status-applied">Applied</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied Feb 10, 2026</span>
+                </div>
+            </div>
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#fff3e0; color:#e65100;">HL</div>
+                    <div class="job-info">
+                        <h3>Accountant</h3>
+                        <span class="company">Hayleys PLC</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Galle</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-draft">Draft</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Saved as draft</span>
+                    <button class="btn btn-primary" style="width:auto; padding:8px 16px; font-size:13px;">Continue</button>
+                </div>
+            </div>
+            <div class="job-card">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#fce4ec; color:#c62828;">JK</div>
+                    <div class="job-info">
+                        <h3>HR Manager</h3>
+                        <span class="company">John Keells Holdings</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="status-badge status-rejected">Rejected</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Applied Jan 20, 2026</span>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-item" onclick="showScreen('screen-home')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</button>
+            <button class="tab-item active" onclick="showScreen('screen-applications')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>Applications</button>
+            <button class="tab-item" onclick="showScreen('screen-saved')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>Saved</button>
+            <button class="tab-item" onclick="showScreen('screen-profile')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profile</button>
+        </div>
+    </div>
+
+    <!-- =================== 6. SAVED JOBS =================== -->
+    <div class="screen" id="screen-saved">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-home')">&larr;</button>
+            <h1>Saved Jobs</h1>
+        </div>
+        <div class="content">
+            <div class="saved-job-card">
+                <span class="bookmark-icon">&#128278;</span>
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#e8f5e9; color:#2e7d32;">MAS</div>
+                    <div class="job-info">
+                        <h3>Supply Chain Analyst</h3>
+                        <span class="company">MAS Holdings</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 150K-200K</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Saved 2 days ago</span>
+                    <button class="btn btn-primary" style="width:auto; padding:8px 20px; font-size:13px;">Apply Now</button>
+                </div>
+            </div>
+            <div class="saved-job-card">
+                <span class="bookmark-icon">&#128278;</span>
+                <div class="job-card-header">
+                    <div class="company-logo">SL</div>
+                    <div class="job-info">
+                        <h3>DevOps Engineer</h3>
+                        <span class="company">SyscoLABS</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 200K-300K</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Saved 5 days ago</span>
+                    <button class="btn btn-primary" style="width:auto; padding:8px 20px; font-size:13px;">Apply Now</button>
+                </div>
+            </div>
+            <div class="saved-job-card">
+                <span class="bookmark-icon">&#128278;</span>
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#f3e5f5; color:#7b1fa2;">ZN</div>
+                    <div class="job-info">
+                        <h3>Business Analyst</h3>
+                        <span class="company">Zone24x7</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Saved 1 week ago</span>
+                    <button class="btn btn-primary" style="width:auto; padding:8px 20px; font-size:13px;">Apply Now</button>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-item" onclick="showScreen('screen-home')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</button>
+            <button class="tab-item" onclick="showScreen('screen-applications')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>Applications</button>
+            <button class="tab-item active" onclick="showScreen('screen-saved')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>Saved</button>
+            <button class="tab-item" onclick="showScreen('screen-profile')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profile</button>
+        </div>
+    </div>
+
+    <!-- =================== 7. PROFILE SCREEN =================== -->
+    <div class="screen" id="screen-profile">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-home')">&larr;</button>
+            <h1>My Profile</h1>
+            <button class="header-btn" onclick="showScreen('screen-settings')">&#9881;</button>
+        </div>
+        <div class="content">
+            <div class="profile-header-card">
+                <div class="avatar">KP</div>
+                <div class="profile-name">Kamal Perera</div>
+                <div class="profile-title">Senior Software Engineer</div>
+                <div class="profile-location">&#128205; Colombo, Western Province</div>
+                <div class="premium-badge">&#11088; Premium Member - 245 days left</div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Personal Info</h3>
+                <div style="background:white; border-radius:12px; padding:4px 16px;">
+                    <div class="profile-field">
+                        <span class="field-label">Email</span>
+                        <span class="field-value">kamal@email.com</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">Mobile</span>
+                        <span class="field-value">+94 77 123 4567</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">Address</span>
+                        <span class="field-value">42 Galle Road, Colombo 03</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">LinkedIn</span>
+                        <span class="field-value" style="color:var(--primary)">linkedin.com/in/kamalp</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">Employer</span>
+                        <span class="field-value">WSO2 Lanka (Pvt) Ltd</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Personal Summary</h3>
+                <div style="background:white; border-radius:12px; padding:16px;">
+                    <p style="font-size:14px; color:var(--text); line-height:1.6;">Experienced software engineer with 8+ years in full-stack development. Passionate about building scalable applications and mentoring junior developers.</p>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Preferred Sectors</h3>
+                <div class="sector-tags">
+                    <span class="sector-tag">Information Technology</span>
+                    <span class="sector-tag">Banking & Finance</span>
+                    <span class="sector-tag">Telecommunications</span>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>My CV</h3>
+                <div class="cv-card" style="margin: 0;" onclick="showScreen('screen-cv')">
+                    <div class="cv-icon">&#128196;</div>
+                    <div class="cv-info">
+                        <h4>Kamal Perera_cv.pdf</h4>
+                        <p>Uploaded Feb 10, 2026</p>
+                    </div>
+                    <div style="color:var(--text-secondary);">&#10095;</div>
+                </div>
+            </div>
+
+            <div style="padding: 16px;">
+                <button class="btn btn-primary" style="margin-bottom:12px;">&#9998; Edit Profile</button>
+            </div>
+            <br>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-item" onclick="showScreen('screen-home')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</button>
+            <button class="tab-item" onclick="showScreen('screen-applications')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>Applications</button>
+            <button class="tab-item" onclick="showScreen('screen-saved')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>Saved</button>
+            <button class="tab-item active" onclick="showScreen('screen-profile')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profile</button>
+        </div>
+    </div>
+
+    <!-- =================== 8. CV MANAGEMENT =================== -->
+    <div class="screen" id="screen-cv">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-profile')">&larr;</button>
+            <h1>My CV</h1>
+        </div>
+        <div class="content">
+            <div style="padding: 16px;">
+                <h3 style="font-size:14px; font-weight:700; margin-bottom:12px; color:var(--text);">CURRENT CV</h3>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon">&#128196;</div>
+                <div class="cv-info">
+                    <h4>Kamal Perera_cv.pdf</h4>
+                    <p>PDF - Uploaded Feb 10, 2026</p>
+                </div>
+                <div class="cv-actions">
+                    <button class="cv-action-btn" title="View">&#128065;</button>
+                    <button class="cv-action-btn" title="Download">&#11015;</button>
+                </div>
+            </div>
+            <div style="padding: 16px;">
+                <div class="upload-area">
+                    <div class="upload-icon">&#128228;</div>
+                    <p><strong>Upload New CV</strong></p>
+                    <span class="format">PDF, DOC, DOCX (Max 5MB)</span>
+                </div>
+            </div>
+            <div style="padding: 0 16px;">
+                <h3 style="font-size:14px; font-weight:700; margin-bottom:12px; color:var(--text);">CV FORMATS</h3>
+                <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Browse professional CV templates</p>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:#e6f7fc;">&#128203;</div>
+                <div class="cv-info">
+                    <h4>Professional Template</h4>
+                    <p>Clean & modern layout</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:#e8f5e9;">&#128203;</div>
+                <div class="cv-info">
+                    <h4>Creative Template</h4>
+                    <p>Stand out from the crowd</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+            <div class="cv-card">
+                <div class="cv-icon" style="background:#fff3e0;">&#128203;</div>
+                <div class="cv-info">
+                    <h4>Executive Template</h4>
+                    <p>For senior professionals</p>
+                </div>
+                <div style="color:var(--text-secondary);">&#10095;</div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <!-- =================== 9. SEARCH HISTORY =================== -->
+    <div class="screen" id="screen-search-history">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-home')">&larr;</button>
+            <h1>Search History</h1>
+        </div>
+        <div class="content">
+            <div style="padding:16px;">
+                <input class="form-input" placeholder="&#128269; Search for jobs..." style="padding-left:16px;" onclick="showScreen('screen-search')">
+            </div>
+            <div style="padding: 0 16px 8px;">
+                <span style="font-size:13px; font-weight:600; color:var(--text-secondary);">RECENT SEARCHES</span>
+            </div>
+            <div class="search-item">
+                <span class="search-icon">&#128269;</span>
+                <div class="search-text">
+                    <h4>Software Engineer</h4>
+                    <p>Colombo - Feb 16, 2026</p>
+                </div>
+                <span class="search-delete">&#10005;</span>
+            </div>
+            <div class="search-item">
+                <span class="search-icon">&#128269;</span>
+                <div class="search-text">
+                    <h4>UI/UX Designer</h4>
+                    <p>All locations - Feb 15, 2026</p>
+                </div>
+                <span class="search-delete">&#10005;</span>
+            </div>
+            <div class="search-item">
+                <span class="search-icon">&#128269;</span>
+                <div class="search-text">
+                    <h4>Project Manager</h4>
+                    <p>Kandy - Feb 12, 2026</p>
+                </div>
+                <span class="search-delete">&#10005;</span>
+            </div>
+            <div class="search-item">
+                <span class="search-icon">&#128269;</span>
+                <div class="search-text">
+                    <h4>Data Analyst</h4>
+                    <p>Colombo - Feb 10, 2026</p>
+                </div>
+                <span class="search-delete">&#10005;</span>
+            </div>
+            <div class="search-item">
+                <span class="search-icon">&#128269;</span>
+                <div class="search-text">
+                    <h4>DevOps Engineer</h4>
+                    <p>All locations - Feb 8, 2026</p>
+                </div>
+                <span class="search-delete">&#10005;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 10. JOB SEARCH + RESULTS =================== -->
+    <div class="screen" id="screen-search">
+        <div class="header" style="padding-bottom:0;">
+            <button class="back-btn" onclick="showScreen('screen-home')">&larr;</button>
+            <h1>Search Jobs</h1>
+            <button class="header-btn" onclick="showScreen('screen-filters')">&#9776;</button>
+        </div>
+        <div class="search-bar-row">
+            <input class="form-input" placeholder="Job title, keyword..." value="Software Engineer">
+            <button class="search-go" onclick="showScreen('screen-search')">&#128269;</button>
+        </div>
+        <div class="filter-bar">
+            <span class="filter-chip active">All</span>
+            <span class="filter-chip">Colombo</span>
+            <span class="filter-chip">Full-time</span>
+            <span class="filter-chip">IT</span>
+            <span class="filter-chip">Remote</span>
+        </div>
+        <div class="search-result-count"><strong>48 jobs</strong> found for "Software Engineer"</div>
+        <div class="content">
+            <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
+                <div class="job-card-header">
+                    <div class="company-logo">DB</div>
+                    <div class="job-info">
+                        <h3>Senior Software Engineer</h3>
+                        <span class="company">Dialog Broadband</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 200K-350K</span>
+                    <span class="remote-tag">Remote</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Posted 2 hours ago</span>
+                    <button class="save-btn">&#9825;</button>
+                </div>
+            </div>
+            <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#e8f5e9; color:#2e7d32;">WS</div>
+                    <div class="job-info">
+                        <h3>Full Stack Developer</h3>
+                        <span class="company">WSO2 Lanka</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 250K-400K</span>
+                    <span class="urgent-tag">Urgent</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Posted 1 day ago</span>
+                    <button class="save-btn">&#9825;</button>
+                </div>
+            </div>
+            <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#f3e5f5; color:#7b1fa2;">ZN</div>
+                    <div class="job-info">
+                        <h3>Software Engineer - Java</h3>
+                        <span class="company">Zone24x7</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 180K-280K</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Posted 3 days ago</span>
+                    <button class="save-btn">&#9825;</button>
+                </div>
+            </div>
+            <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#fff3e0; color:#e65100;">SL</div>
+                    <div class="job-info">
+                        <h3>Associate Software Engineer</h3>
+                        <span class="company">SyscoLABS</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 100K-150K</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Posted 5 days ago</span>
+                    <button class="save-btn">&#9829;</button>
+                </div>
+            </div>
+            <div class="job-card clickable" onclick="showScreen('screen-job-detail')">
+                <div class="job-card-header">
+                    <div class="company-logo" style="background:#fce4ec; color:#c62828;">99X</div>
+                    <div class="job-info">
+                        <h3>Lead Software Engineer</h3>
+                        <span class="company">99X Technology</span>
+                    </div>
+                </div>
+                <div class="job-meta">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 400K-500K</span>
+                    <span class="remote-tag">Remote</span>
+                </div>
+                <div class="job-card-footer">
+                    <span class="applied-date">Posted 1 week ago</span>
+                    <button class="save-btn">&#9825;</button>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="tab-bar">
+            <button class="tab-item" onclick="showScreen('screen-home')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home</button>
+            <button class="tab-item active" onclick="showScreen('screen-search')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>Search</button>
+            <button class="tab-item" onclick="showScreen('screen-saved')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>Saved</button>
+            <button class="tab-item" onclick="showScreen('screen-profile')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profile</button>
+        </div>
+    </div>
+
+    <!-- =================== 11. SEARCH FILTERS =================== -->
+    <div class="screen" id="screen-filters">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-search')">&larr;</button>
+            <h1>Filters</h1>
+        </div>
+        <div class="content" style="padding-bottom: 72px;">
+            <div class="filter-section">
+                <h3>Location</h3>
+                <div class="filter-option-list">
+                    <span class="filter-option selected">Colombo</span>
+                    <span class="filter-option">Kandy</span>
+                    <span class="filter-option">Galle</span>
+                    <span class="filter-option">Gampaha</span>
+                    <span class="filter-option">Kurunegala</span>
+                    <span class="filter-option">Jaffna</span>
+                    <span class="filter-option">Matara</span>
+                    <span class="filter-option">Negombo</span>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Sector</h3>
+                <div class="filter-option-list">
+                    <span class="filter-option selected">Information Technology</span>
+                    <span class="filter-option">Banking & Finance</span>
+                    <span class="filter-option">Engineering</span>
+                    <span class="filter-option">Marketing</span>
+                    <span class="filter-option">Healthcare</span>
+                    <span class="filter-option">Education</span>
+                    <span class="filter-option">Hospitality</span>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Job Type</h3>
+                <div class="filter-option-list">
+                    <span class="filter-option selected">Full-time</span>
+                    <span class="filter-option">Part-time</span>
+                    <span class="filter-option">Contract</span>
+                    <span class="filter-option">Internship</span>
+                    <span class="filter-option">Freelance</span>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Career Level</h3>
+                <div class="filter-option-list">
+                    <span class="filter-option">Entry Level</span>
+                    <span class="filter-option selected">Mid Level</span>
+                    <span class="filter-option">Senior Level</span>
+                    <span class="filter-option">Executive</span>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Posted Within</h3>
+                <div class="filter-option-list">
+                    <span class="filter-option">24 hours</span>
+                    <span class="filter-option selected">7 days</span>
+                    <span class="filter-option">14 days</span>
+                    <span class="filter-option">30 days</span>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Special</h3>
+                <div class="filter-option-list">
+                    <span class="filter-option">CV-less Apply</span>
+                    <span class="filter-option">Walk-in</span>
+                    <span class="filter-option">SLIM Required</span>
+                    <span class="filter-option">Remote</span>
+                </div>
+            </div>
+        </div>
+        <div class="filter-bottom">
+            <button class="btn btn-ghost">Clear All</button>
+            <button class="btn btn-primary" onclick="showScreen('screen-search')">Show 48 Jobs</button>
+        </div>
+    </div>
+
+    <!-- =================== 12. JOB DETAIL =================== -->
+    <div class="screen" id="screen-job-detail">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-search')">&larr;</button>
+            <h1>Job Details</h1>
+            <button class="header-btn">&#8942;</button>
+        </div>
+        <div class="content" style="padding-bottom: 72px;">
+            <div class="job-detail-hero">
+                <div class="company-logo" style="width:60px;height:60px;margin:0 auto 12px;font-size:22px;">DB</div>
+                <h2>Senior Software Engineer</h2>
+                <div class="company-name">Dialog Broadband Networks (Pvt) Ltd</div>
+                <div class="job-detail-tags">
+                    <span class="meta-tag">&#128205; Colombo</span>
+                    <span class="meta-tag">&#128188; Full-time</span>
+                    <span class="meta-tag">&#128176; LKR 200K-350K</span>
+                    <span class="remote-tag">Remote</span>
+                </div>
+                <div style="margin-top:12px; font-size:12px; color:var(--text-secondary);">
+                    Posted Feb 17, 2026 &bull; Expires in 12 days &bull; 234 views
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-grid">
+                    <div class="detail-grid-item">
+                        <div class="label">Experience</div>
+                        <div class="value">5-8 years</div>
+                    </div>
+                    <div class="detail-grid-item">
+                        <div class="label">Education</div>
+                        <div class="value">Bachelor's Degree</div>
+                    </div>
+                    <div class="detail-grid-item">
+                        <div class="label">Salary</div>
+                        <div class="value">LKR 200K-350K</div>
+                    </div>
+                    <div class="detail-grid-item">
+                        <div class="label">Sector</div>
+                        <div class="value">IT / Software</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>Overview</h3>
+                <p>We are looking for an experienced Senior Software Engineer to join our growing engineering team. You will be responsible for designing, developing, and maintaining scalable software solutions that serve millions of users across Sri Lanka.</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>Key Responsibilities</h3>
+                <ul>
+                    <li>Design and implement high-performance, reusable, and reliable code</li>
+                    <li>Lead code reviews and mentor junior engineers</li>
+                    <li>Collaborate with cross-functional teams including product, design, and QA</li>
+                    <li>Participate in architectural decisions and system design</li>
+                    <li>Troubleshoot and debug production issues</li>
+                </ul>
+            </div>
+
+            <div class="detail-section">
+                <h3>Requirements</h3>
+                <ul>
+                    <li>5+ years of experience in software development</li>
+                    <li>Strong proficiency in Java, C#, or Python</li>
+                    <li>Experience with cloud services (AWS/Azure)</li>
+                    <li>Excellent understanding of software design patterns</li>
+                    <li>BSc in Computer Science or related field</li>
+                </ul>
+            </div>
+
+            <div class="detail-section">
+                <h3>Benefits</h3>
+                <ul>
+                    <li>Competitive salary + annual bonus</li>
+                    <li>Health insurance for you and your family</li>
+                    <li>Flexible work arrangements (hybrid/remote)</li>
+                    <li>Learning & development budget</li>
+                    <li>Free Dialog mobile connection</li>
+                </ul>
+            </div>
+
+            <div class="detail-section">
+                <h3>About the Company</h3>
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+                    <div class="company-logo">DB</div>
+                    <div>
+                        <div style="font-weight:600; font-size:14px;">Dialog Broadband Networks</div>
+                        <div style="font-size:12px; color:var(--text-secondary);">Telecommunications &bull; 1000+ employees &bull; 24 open jobs</div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" style="font-size:13px; padding:10px;" onclick="showScreen('screen-company-jobs')">View All Jobs from this Company</button>
+            </div>
+
+            <div style="padding: 16px;">
+                <h3 style="font-size:14px; font-weight:700; margin-bottom:12px;">Related Jobs</h3>
+            </div>
+            <div class="related-jobs-row">
+                <div class="related-job-mini" onclick="showScreen('screen-job-detail')">
+                    <h4>Full Stack Developer</h4>
+                    <div class="company">WSO2 Lanka</div>
+                    <span class="meta-tag">&#128205; Colombo</span>
+                </div>
+                <div class="related-job-mini" onclick="showScreen('screen-job-detail')">
+                    <h4>Software Engineer - Java</h4>
+                    <div class="company">Zone24x7</div>
+                    <span class="meta-tag">&#128205; Colombo</span>
+                </div>
+                <div class="related-job-mini" onclick="showScreen('screen-job-detail')">
+                    <h4>DevOps Engineer</h4>
+                    <div class="company">SyscoLABS</div>
+                    <span class="meta-tag">&#128205; Colombo</span>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="sticky-apply">
+            <button class="btn btn-save">&#9825;</button>
+            <button class="btn btn-primary" onclick="showScreen('screen-job-apply')">Apply Now</button>
+        </div>
+    </div>
+
+    <!-- =================== 13. JOB APPLY =================== -->
+    <div class="screen" id="screen-job-apply">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-job-detail')">&larr;</button>
+            <h1>Apply for Job</h1>
+        </div>
+        <div class="content">
+            <div style="background:white; padding:16px; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:center;">
+                <div class="company-logo">DB</div>
+                <div>
+                    <div style="font-size:15px; font-weight:600;">Senior Software Engineer</div>
+                    <div style="font-size:13px; color:var(--text-secondary);">Dialog Broadband</div>
+                </div>
+            </div>
+            <div class="apply-section">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input class="form-input" value="Kamal Perera">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-input" type="email" value="kamal@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Cover Letter (Optional)</label>
+                    <textarea placeholder="Tell the employer why you're a great fit for this role...">Dear Hiring Manager,
+
+I am excited to apply for the Senior Software Engineer position at Dialog Broadband. With 8+ years of experience in full-stack development, I bring strong expertise in Java, cloud services, and system design.
+
+Looking forward to contributing to your team.
+
+Best regards,
+Kamal Perera</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Select CV</label>
+                    <div class="cv-select-card selected" style="margin-bottom:10px;">
+                        <div class="radio-dot"></div>
+                        <div>
+                            <div style="font-size:14px; font-weight:500;">Kamal Perera_cv.pdf</div>
+                            <div style="font-size:12px; color:var(--text-secondary);">Current CV &bull; Uploaded Feb 10</div>
+                        </div>
+                    </div>
+                    <div class="cv-select-card">
+                        <div class="radio-dot"></div>
+                        <div>
+                            <div style="font-size:14px; font-weight:500;">Upload New CV</div>
+                            <div style="font-size:12px; color:var(--text-secondary);">PDF, DOC, DOCX (Max 5MB)</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="showScreen('screen-apply-success')">Submit Application</button>
+                <br>
+                <button class="btn btn-outline" style="margin-top:10px;" onclick="showScreen('screen-job-detail')">Save as Draft</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 14. APPLY SUCCESS =================== -->
+    <div class="screen" id="screen-apply-success">
+        <div class="content" style="display:flex; flex-direction:column; justify-content:center; padding-bottom:0;">
+            <div class="apply-success">
+                <div class="check">&#10003;</div>
+                <h2>Application Submitted!</h2>
+                <p>Your application for <strong>Senior Software Engineer</strong> at <strong>Dialog Broadband</strong> has been successfully submitted. You'll receive a confirmation email shortly.</p>
+                <button class="btn btn-primary" onclick="showScreen('screen-applications')" style="margin-bottom:12px;">View My Applications</button>
+                <button class="btn btn-outline" onclick="showScreen('screen-search')">Search More Jobs</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== 15. SETTINGS =================== -->
+    <div class="screen" id="screen-settings">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('screen-profile')">&larr;</button>
+            <h1>Settings</h1>
+        </div>
+        <div class="content">
+            <div class="settings-group">
+                <div class="settings-group-title">Account</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <span class="icon">&#128231;</span>
+                        <span class="label">Change Email</span>
+                        <span class="arrow">&#10095;</span>
+                    </div>
+                    <div class="settings-item">
+                        <span class="icon">&#128274;</span>
+                        <span class="label">Change Password</span>
+                        <span class="arrow">&#10095;</span>
+                    </div>
+                    <div class="settings-item">
+                        <span class="icon">&#128100;</span>
+                        <span class="label">Edit Profile</span>
+                        <span class="arrow">&#10095;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-group-title">Notifications</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <span class="icon">&#128276;</span>
+                        <span class="label">Push Notifications</span>
+                        <div class="toggle on"></div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="icon">&#128231;</span>
+                        <span class="label">Jobs by Email</span>
+                        <div class="toggle on"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-group-title">Premium</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <span class="icon">&#11088;</span>
+                        <span class="label">Premium Membership</span>
+                        <span style="font-size:13px; color:var(--success); font-weight:600;">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-group-title">Support</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <span class="icon">&#128172;</span>
+                        <span class="label">Contact Us</span>
+                        <span class="arrow">&#10095;</span>
+                    </div>
+                    <div class="settings-item">
+                        <span class="icon">&#128220;</span>
+                        <span class="label">Terms & Conditions</span>
+                        <span class="arrow">&#10095;</span>
+                    </div>
+                    <div class="settings-item">
+                        <span class="icon">&#128272;</span>
+                        <span class="label">Privacy Policy</span>
+                        <span class="arrow">&#10095;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-list">
+                    <div class="settings-item" onclick="showScreen('screen-login')">
+                        <span class="icon">&#128682;</span>
+                        <span class="label" style="color:var(--danger);">Sign Out</span>
+                    </div>
+                    <div class="settings-item danger">
+                        <span class="icon">&#128465;</span>
+                        <span class="label">Delete Account</span>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    // Toggle switches
+    document.querySelectorAll('.toggle').forEach(toggle => {
+        toggle.addEventListener('click', () => toggle.classList.toggle('on'));
+    });
+
+    // Filter option chip toggles
+    document.querySelectorAll('.filter-option').forEach(opt => {
+        opt.addEventListener('click', () => opt.classList.toggle('selected'));
+    });
+
+    // Search history items navigate to search
+    document.querySelectorAll('.search-item .search-text').forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => showScreen('screen-search'));
+    });
+</script>
+
+</body>
+</html>
